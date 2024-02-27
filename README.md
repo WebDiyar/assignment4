@@ -1,78 +1,86 @@
+# Project Overview
 
-Authentication and Authorization: 20%
+# Scrapper website, Auth and Admin
 
-1. User Registration:
-   • Create a registration page where users can sign up by providing a username, password, and
-   any other required information.✅
+## Admin details
+1) Username: `Diyar`
+2) Password: `Diyar_11`
+   
+## Installation
 
-   • When a user registers, hash their password using bcrypt before storing it in the database along
-   with other information like username, creation date, etc.✅
-   • Ensure that the username is unique to avoid conflicts. ✅
+### Prerequisites
 
-2. User Login:
-   • Create a login page where users can input their username and password. ✅
-   • Retrieve the user's hashed password from the database based on the provided username.✅
-   • Use bcrypt to compare the hashed password stored in the database with the password entered
-   by the user during login. ✅
-   • If the passwords match, authenticate the user and redirect them to the main page. ✅
+- Node.js installed on your system.
 
-3. Authentication Middleware:
-   • Implement middleware to protect routes that require authentication.✅
-   • This middleware should check if the user is logged in by verifying the presence of a session
-   token or any other authentication mechanism you're using.✅
-   • If the user is not authenticated, redirect them to the login page. ✅
+### Setup Instructions
 
-4. Authorization:
-   • Define user roles or permissions such as 'admin' or 'regular user'.
-   20%✅
-   • Store the user's role in the database.✅
-   • Implement authorization checks on routes that require specific permissions.
-   • For example, only allow administrators to access the admin page or perform administrative ✅
-   actions.
-   It is essential that your admin username is your name. Additionally, include detailed password
-   information in the README file.✅
-   Note: Execute your logic within the core JavaScript file of the server
+#### Clone the Repository
 
-REST API: 35%
-Implement a functionality within your admin page enabling the addition of new items related to
-your topic to your main page. Each item should include three pictures, two names for localization
-in different languages, two descriptions for localization, and timestamps for creation, update, and
-deletion. Admins should be able to edit, delete, and add these items. On the main page, display
-these items in well-designed blocks, each featuring a carousel showcasing the three pictures.
-Ensure that each block also displays the name and description of the item. ✅
+1) Open the cmd:
+2) `git clone https://github.com/WebDiyar/assignment4.git`
+3) `cd assignment4`
+4) `npm install`
+5) `npm start` or `node app.js` or `nodemon app.js`
 
-APIs: 30% ✅
-Add two different APIs related to your topic. Implement multi-language support, allowing users
-to select their preferred language for a personalized experience.
-Note: If your APIs were previously focused on mapping, weather, or geolocation, you'll need to
-replace them with new ones that offer valuable data and differ from your API choice.
+#### Configuration
 
-Project Organization and Design 15%✅
-Clean Code and Project Structure:
-Keep your code clean, well-documented, and organized. Follow best practices for coding and
-maintain a clear project structure that you learned from previous assignment. (readme file)
-Responsive Design and User Interface:
-• Enhance the user interface with thoughtful design elements, making the application visually
-appealing with EJS.
+- Ensure you have the following API keys:
+  - Rapid API(Scrapper):  [Scrapper](https://rapidapi.com/fyhao/api/site-scraper)
+  - MockAPi: [MockAPi](https://65dd86d3e7edadead7ee2447.mockapi.io/mockApi/mockApi)
+ 
+# Application Routes
 
-Overall you can get 100%
+This Node.js application defines several routes for different functionalities. Below are the routes and their descriptions:
 
-Bonus task. Add this to your navbar as “Bonus”.
-To clarify, students must fully implement both parts of the bonus task in order to receive any
-marks for it. Each part is considered essential for the completion of the bonus task, and partial
-implementation will not be awarded any points.
+# Dependencies
 
-1. Timed Quizzes (at least 5 questions): 10%
-   • Implement a countdown timer for each quiz session, allowing users a limited amount of
-   time to complete the quiz.
-   • Display the remaining time to users and automatically submit the quiz when the time
-   runs out.
-   • Provide feedback to users on whether they completed the quiz within the time limit.
-2. Social Sharing:
-   • Integrate social media sharing buttons (e.g., Facebook, Twitter, LinkedIn) within the
-   quiz interface.
-   • Enable users to share their quiz results or invite friends to participate in the quiz.
-   • Include dynamic sharing content, such as a summary of quiz performance or an
-   intriguing quiz question, to encourage engagement.
-   Note: Store quiz questions, answer options, correct answers, and related metadata (e.g.,
-   category, difficulty level) in MongoDB Atlas.
+This project has the following dependencies:
+
+- [axios](https://www.npmjs.com/package/axios): ^1.6.7
+- [bcrypt](https://www.npmjs.com/package/bcrypt): ^5.1.1
+- [blob-stream](https://www.npmjs.com/package/blob-stream): ^0.1.3
+- [body-parser](https://www.npmjs.com/package/body-parser): ^1.20.2
+- [bootstrap](https://www.npmjs.com/package/bootstrap): ^5.3.3
+- [ejs](https://www.npmjs.com/package/ejs): ^3.1.9
+- [express](https://www.npmjs.com/package/express): ^4.18.2
+- [express-session](https://www.npmjs.com/package/express-session): ^1.18.0
+- [i18n](https://www.npmjs.com/package/i18n): ^0.15.1
+- [mongodb](https://www.npmjs.com/package/mongodb): ^6.3.0
+- [mongoose](https://www.npmjs.com/package/mongoose): ^8.1.1
+- [multer](https://www.npmjs.com/package/multer): ^1.4.5-lts.1
+- [nodemon](https://www.npmjs.com/package/nodemon): ^3.0.3
+- [pdfkit](https://www.npmjs.com/package/pdfkit): ^0.14.0
+- [sneaks-api](https://www.npmjs.com/package/sneaks-api): ^1.2.3
+- [swiper](https://www.npmjs.com/package/swiper): ^11.0.6
+
+
+## Routes
+
+- `/`: 
+  - Description: User registration
+  - Use: `app.use("/", registerRouter)`
+  
+- `/register`: 
+  - Description: User login
+  - Use: `app.use("/", loginRouter)`
+
+- `/admin`: 
+  - Description: Admin section
+  - Use: `app.use("/admin", adminRouter)`
+
+- `/user`: 
+  - Description: User section
+  - Use: `app.use("/user", userRouter)`
+
+- `/scrapperApi`: 
+  - Description: Scrapper
+  - Use: `app.use("/", scrapperApi)` (1st API)
+
+- `/mockapi`: 
+  - Description: MockAPI
+  - Use: `app.use("/", mockApi)` (2nd API)
+  
+- `/quiz`: 
+  - Description: History
+  - Use: `app.use("/", quizRouter)`
+

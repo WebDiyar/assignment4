@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const app = express();
 const i18n = require("i18n");
-const { connectToMongoDB } = require("./db"); // Путь к вашему файлу db.js
+const { connectToMongoDB } = require("./db");
 const session = require("express-session");
 
 app.use(express.static("public"));
@@ -16,12 +16,11 @@ i18n.configure({
   objectNotation: true,
 });
 
-// Подключаем ejs
 app.set("view engine", "ejs");
 app.use(i18n.init);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
-// подключаем бд
+
 mongoose.connect(
   "mongodb+srv://Diyar:Asd__200205_tr@diyar.qhyiil5.mongodb.net/assignment4_backend",
   {
@@ -53,11 +52,9 @@ app.use(
 // const apiRouter = require("./routes/apiRouter");
 connectToMongoDB()
   .then((client) => {
-    // Добавляем экземпляр базы данных в локальные переменные приложения
     app.locals.db = client.db();
 
-    // Используем маршруты
-    app.use("/", registerRouter); // General routes
+    app.use("/", registerRouter);
     app.use("/", loginRouter);
     app.use("/", quizRouter);
     app.use("/admin", requireAuth, adminRouter);
@@ -71,13 +68,11 @@ connectToMongoDB()
     console.error("Error connecting to MongoDB Atlas", error);
   });
 
-// Используем маршрутизаторы
 // app.use('/', mainRouter);
 // app.use('/users', userRouter);
 // app.use('/', registerRouter);
 // app.use('/', loginRouter);
 
-// Запускаем сервер
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
