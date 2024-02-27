@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <style>
+    *,
+    *:before,
+    *:after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: #f4f4f4;
+      color: #333;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .form-container {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      display: grid;
+      grid-template-columns: 2;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      margin-bottom: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .add-item-button {
+      background-color: #4caf50;
+      padding: 10px 20px;
+      border: 1px solid green;
+    }
+
+    .edit-button {
+      background-color: #2196f3;
+    }
+
+    .delete-button {
+      background-color: #f44336;
+    }
+
+    .button:hover {
+      opacity: 0.8;
+    }
+
+    .item {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .item h2,
+    .item p {
+      margin: 0;
+      padding-bottom: 8px;
+    }
+
+    .item .top-row,
+    .item .bottom-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .item .top-row {
+      flex-wrap: wrap;
+    }
+
+    .item .pictures {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+    }
+
+    .item .pictures img {
+      width: calc(33.333% - 10px);
+      height: auto;
+      margin: 0 5px;
+      border-radius: 4px;
+    }
+
+    .item .bottom-row {
+      padding-top: 8px;
+    }
+
+    .edit-button,
+    .delete-button {
+      margin-top: 0;
+      width: calc(50% - 4px);
+      margin: 0 2px;
+      padding: 10px 0px;
+      border: 0px;
+    }
+
+    @media (max-width: 768px) {
+
+      .item .top-row,
+      .item .pictures,
+      .item .bottom-row {
+        flex-direction: column;
+      }
+
+      .item .pictures img {
+        width: 100%;
+        margin: 8px 0;
+      }
+
+      .edit-button,
+      .delete-button {
+        width: 100%;
+        margin: 8px 0;
+      }
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  </style>
+</head>
+
+<body>
+  <form method="POST" action="/admin/add" class="form-container">
+    <label for="enName">English Name:</label>
+    <input type="text" name="enName" required class="input-field" />
+    <label for="esName">Spanish Name:</label>
+    <input type="text" name="esName" required class="input-field" />
+    <label for="enDescription">English Description:</label>
+    <input type="text" name="enDescription" required class="input-field" />
+    <label for="esDescription">Spanish Description:</label>
+    <input type="text" name="esDescription" required class="input-field" />
+    <label for="picture1">Additional Picture 1(image url):</label>
+    <input type="text" name="picture2" class="input-field" />
+    <label for="picture2">Additional Picture 2(image url):</label>
+    <input type="text" name="picture3" class="input-field" />
+    <label for="picture3">Additional Picture 3(image url):</label>
+    <input type="text" name="picture4" class="input-field" />
+    <button class="add-item-button" type="submit">Add Item</button>
+  </form>
+
+  <!-- Display items -->
+  <% items.forEach(item=> { %>
+    <div class="item">
+      <h2>Name: <%= item.names.en %>
+      </h2>
+      <p>Description: <%= item.descriptions.en %>
+      </p>
+      <div class="pictures">
+        <% item.pictures.forEach(picture=> { %>
+          <img src="<%= picture %>" alt="Description" class="picture" />
+          <% }); %>
+      </div>
+      <div class="buttons">
+        <button class="edit-button" onclick="editItem('<%= item._id %>')">Edit</button>
+        <button class="delete-button" onclick="deleteItem('<%= item._id %>')">Delete</button>
+      </div>
+    </div>
+    <% }); %>
+
+      <script>
+        function deleteItem(itemId) {
+          fetch(`/admin/delete/${itemId}`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((response) => {
+              if (response.ok) {
+                console.log("Item deleted successfully");
+                window.location.reload();
+              } else {
+                console.error("Error deleting item:", response.statusText);
+              }
+            })
+            .catch((error) => {
+              console.error("Error deleting item:", error);
+            });
+        }
+
+        function editItem(itemId) {
+          window.location.href = `/admin/edit/${itemId}`;
+        }
+      </script>
+</body>
+
+</html>

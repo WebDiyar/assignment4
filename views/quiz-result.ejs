@@ -1,0 +1,102 @@
+<!-- views/quiz-results.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz Results</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Arial', sans-serif;
+        background-color: #f7f7f7;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+    
+      .container {
+        text-align: center;
+        margin: 20px;
+        padding: 20px;
+        background: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+      }
+    
+      .quiz-results,
+      .your-score,
+      .share-result {
+        margin: 0;
+        padding: 10px;
+      }
+    
+      .quiz-results {
+        color: #2c3e50;
+        font-size: 2em;
+      }
+    
+      .your-score {
+        color: #27ae60;
+        font-size: 1.5em;
+      }
+    
+      .share-result {
+        font-size: 1.2em;
+        margin-top: 20px;
+      }
+    
+      a.Facebook,
+      a.Twitter {
+        text-decoration: none;
+        display: inline-block;
+        margin: 10px;
+        padding: 10px 20px;
+        color: #fff;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+      }
+    
+      a.Facebook {
+        background-color: #3b5998;
+      }
+    
+      a.Facebook:hover {
+        background-color: #2d4373;
+      }
+    
+      a.Twitter {
+        background-color: #1da1f2;
+      }
+    
+      a.Twitter:hover {
+        background-color: #0d95e8;
+      }
+    </style>
+
+  </head>
+  <body>
+    <h1 class="quiz-results">Quiz Results</h1>
+
+    <p class="your-score">Your score is <%= score %>/5</p>
+
+    <div class="container ">
+      <h3 class="share-result">Share your quiz results:</h3>
+      <!-- Replace the URLs and content with your actual sharing details -->
+      <a href="https://www.facebook.com/?locale=ru_RU" target="_blank" class="Facebook"
+        >Share on Facebook</a
+      >
+      <a href="https://twitter.com/?lang=ru" target="_blank" class="Twitter"
+        >Share on Twitter</a
+      >
+      <!-- Add more social media sharing buttons as needed -->
+    </div>
+
+    <!-- Add your script tags for additional JavaScript if applicable -->
+  </body>
+</html>

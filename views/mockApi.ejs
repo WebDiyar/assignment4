@@ -1,0 +1,236 @@
+<!-- mockApi.ejs -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= __("Mock API Data") %></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  </head>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+  .container1 {
+    max-width: 960px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: .25rem;
+  }
+
+  h1 {
+    color: #3498db;
+  }
+
+  button {
+        padding: 10px;
+        margin-top: 10px;
+        background-color: #3498db;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+  .list-group-item {
+    background-color: #ecf0f1;
+    margin-bottom: 20px;
+  }
+
+  .error {
+    color: #e74c3c;
+  }
+    
+      .nav-item:hover,
+      .nav-item:active {
+        color: white;
+      }
+
+      .btn-navitem {
+         width: 100%;
+         border-radius: 20px;
+         padding: 10px 25px;
+         background-color: #007bff;
+         color: white;
+         border: none;
+       }
+
+      #navbar-nav{
+        display: flex;
+        gap: 40px;
+      }
+
+      #nav{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+
+      .footer {
+        position: fixed;
+        bottom: 0px;
+        width: 100%;
+        background-color: #f5f5f5;
+        text-align: center;
+        padding: 10px 0;
+      }
+
+      .languageFormMain{
+        margin-top: 500px;
+      }
+
+      @media (max-width: 1000px) {
+        #navbar-nav{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        
+      }
+
+      #navbar-nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+      }
+
+      .nav-item {
+        list-style-type: none;
+      }
+      
+      .nav-item form {
+        margin: 0 10px; 
+      }
+      
+      .main-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+      #languageFormMain, .user-info {
+        margin: 20px 0;
+      }
+      
+      @media (max-width: 768px) {
+        .itemBlock {
+          width: 100%;
+        }
+      
+        #navbar-nav {
+          display: grid;
+          flex-direction: column;
+        }
+      }
+      
+      #navbarResponsive{
+        margin-left: 15%;
+      }
+    </style>
+
+  <body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-between align-items-center  " id="nav">
+      <div class="navBar container d-flex justify-content-between align-items-center" id="navBaring" id="nav-div">
+        <div><a class="navbar-brand" href="#">
+            <%= __("Assignment 4") %>
+          </a></div>
+    
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+          aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav" id="navbar-nav" style="display: flex; ">
+            <li class="nav-item">
+              <form method="GET" action="/scrapperApi">
+                <button type="submit">
+                  <%= __("scrapper") %>
+                </button>
+              </form>
+            </li>
+            <li class="nav-item">
+              <form method="GET" action="/mockapi">
+                <button type="submit">
+                  <%= __("MockApi") %>
+                </button>
+              </form>
+            </li>
+            <li class="nav-item ">
+              <form method="GET" action="/quiz">
+                <button type="submit">
+                  <%= __("bonuses") %>
+                </button>
+              </form>
+            </li>
+          </ul>
+    
+          <form class="form-inline my-2 my-lg-0" style="margin-left: 35%;">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit" formaction="/">
+              <%= __("Log Out") %>
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+
+    <!-- Language selection form -->
+    <div class="container1 my-4">
+      <form id="languageForm" method="GET" action="/mockapi" class="form-inline justify-content-start">
+        <label for="lang" class="mr-2">
+          <%= __("Select Language") %>:
+        </label>
+        <select name="lang" class="custom-select" onchange="this.form.submit()">
+          <option value="en" <%=locale==='en' ? 'selected' : '' %>>English</option>
+          <option value="es" <%=locale==='es' ? 'selected' : '' %>>Español</option>
+          <!-- Add more language options as needed -->
+        </select>
+      </form>
+    </div>
+  
+    <div class="container1">
+      <h1>
+        <%= __("Mock API Data") %>
+      </h1>
+      <% if (Array.isArray(data) && data.length> 0) { %>
+        <!-- Render user details -->
+        <div class="list-group">
+          <% data.forEach(user=> { %>
+            <div class="list-group-item">
+              <h5 class="mb-1">
+                <%= __("Title") %>: <%= user.responseData %>
+              </h5>
+              <p class="mb-1">
+                <%= __("URL") %>: <a href="<%= user.url %>" target="_blank" class="text-primary">
+                    <%= user.url %>
+                  </a>
+              </p>
+              <small class="text-muted">
+                <%= __("Creating data") %>: <%= new Date(user.createdAt) %>
+              </small>
+            </div>
+            <% }); %>
+        </div>
+        <% } else { %>
+          <p class="error">
+            <%= __("No user data available.") %>
+          </p>
+          <% } %>
+    </div>
+  </body>
+
+</html>
+

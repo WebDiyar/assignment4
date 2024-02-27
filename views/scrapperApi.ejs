@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <title>Scrapper</title>
+  <style>
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f7f7f7;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+.container1 {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-family: 'Helvetica Neue', sans-serif;
+  color: #333;
+  text-align: center;
+  margin-bottom: 24px; /* Add more space under the heading */
+}
+
+label {
+  display: block;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  color: #333;
+  font-weight: bold; /* Make labels bold */
+}
+
+input, select {
+  width: 100%;
+  padding: 12px; /* Increase padding for better touch */
+  margin-bottom: 16px;
+  box-sizing: border-box;
+  border: 2px solid #ccc; /* Thicker border for better visual */
+  border-radius: 4px;
+  transition: border-color 0.3s; /* Smooth transition for interaction */
+}
+
+input:focus, select:focus {
+  border-color: #4CAF50; /* Highlight border color on focus */
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s; /* Transition for a smooth color change */
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.error {
+  color: #ff3333;
+  margin-top: 16px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .container {
+    margin: 20px auto; /* Less margin on smaller screens */
+  }
+
+  h1 {
+    font-size: 24px; /* Smaller font size for headings */
+  }
+}
+
+     body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        color: #333;
+      }
+
+      h1 {
+        color: #3498db;
+      }
+
+      form {
+        margin-top: 20px;
+      }
+
+      label {
+        margin-right: 10px;
+      }
+
+      select {
+        padding: 5px;
+      }
+
+      button {
+        padding: 10px;
+        margin-top: 10px;
+        background-color: #3498db;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #2980b9;
+      }
+
+      .itemBlocks {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin-top: 20px;
+        margin-bottom: 150px;
+      }
+
+      .itemBlock {
+        width: 30%;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .itemBlock h2 {
+        color: #3498db;
+      }
+
+      .itemBlock p {
+        color: #333;
+      }
+
+      .carousel {
+        display: flex;
+        overflow: hidden;
+        margin-top: 10px;
+      }
+
+      .carousel img.carouselImage {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        margin-right: 5px;
+      }
+
+      .nav-item:hover,
+      .nav-item:active {
+        color: white;
+      }
+
+      .btn-navitem {
+         width: 100%;
+         border-radius: 20px;
+         padding: 10px 25px;
+         background-color: #007bff;
+         color: white;
+         border: none;
+       }
+
+      #navbar-nav{
+        display: flex;
+        gap: 40px;
+      }
+
+      #nav{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+
+      .footer {
+        position: fixed;
+        bottom: 0px;
+        width: 100%;
+        background-color: #f5f5f5;
+        text-align: center;
+        padding: 10px 0;
+      }
+
+      .languageFormMain{
+        margin-top: 500px;
+      }
+
+      @media (max-width: 1000px) {
+        #navbar-nav{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        
+      }
+
+      #navbar-nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+      }
+
+      .nav-item {
+        list-style-type: none;
+      }
+      
+      .nav-item form {
+        margin: 0 10px; 
+      }
+      
+      .main-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+      #languageFormMain, .user-info {
+        margin: 20px 0;
+      }
+      
+      .footer {
+        background-color: #7ab8f5;
+        color: #ffffff;
+      }
+      
+      @media (max-width: 768px) {
+        .itemBlock {
+          width: 100%;
+        }
+      
+        #navbar-nav {
+          display: grid;
+          flex-direction: column;
+        }
+      }
+      
+      #navbarResponsive{
+        margin-left: 15%;
+      }
+
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-between align-items-center  " id="nav">
+    <div class="navBar container d-flex justify-content-between align-items-center" id="navBaring" id="nav-div">
+      <div><a class="navbar-brand" href="#">
+          <%= __("Assignment 4") %>
+        </a></div>
+  
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav" id="navbar-nav" style="display: flex; ">
+          <li class="nav-item">
+            <form method="GET" action="/scrapperApi">
+              <button type="submit">
+                <%= __("scrapper") %>
+              </button>
+            </form>
+          </li>
+          <li class="nav-item">
+            <form method="GET" action="/mockapi">
+              <button type="submit">
+                <%= __("MockApi") %>
+              </button>
+            </form>
+          </li>
+          <li class="nav-item ">
+            <form method="GET" action="/quiz">
+              <button type="submit">
+                <%= __("bonuses") %>
+              </button>
+            </form>
+          </li>
+        </ul>
+  
+        <form class="form-inline my-2 my-lg-0" style="margin-left: 35%;">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit" formaction="/">
+            <%= __("Log Out") %>
+          </button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container1">
+    <!-- Language selection form -->
+    <form id="languageForm" method="GET" action="/scrapperApi">
+      <label for="lang">
+        <%= __("Select Language") %>:
+      </label>
+      <select name="lang" onchange="document.getElementById('languageForm').submit()">
+        <option value="en" <%=locale==='en' ? 'selected' : '' %>>English</option>
+        <option value="es" <%=locale==='es' ? 'selected' : '' %>>Español</option>
+      </select>
+    </form>
+  
+    <h1>
+      <%= __("Scrapper Api using NodeJS") %>
+    </h1>
+    <form action="/scrapperApi" method="post">
+      <input type="text" name="scrapper" placeholder="<%= __(" Enter a link to any website ") %>" />
+      <button type="submit" class="btn">
+        <%= __("Get Scrapper") %>
+      </button>
+    </form>
+  
+  </div>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!-- views/quiz.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Timed Quiz</title>
+    <!-- Add your CSS link here if applicable -->
+    <style>
+      /* Place this within your existing <style> tag */
+/* Grid layout for questions */
+.question-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns */
+  grid-template-rows: repeat(3, 1fr); /* 3 rows */
+  gap: 10px; /* Space between grid items */
+  margin-bottom: 20px; /* Space below the grid */
+}
+
+.question-box {
+  border: 2px solid #ddd; /* Frame effect */
+  padding: 10px;
+  border-radius: 4px;
+}
+
+/* Ensure that the form fits the viewport without scrolling */
+html, body {
+  max-height: 100%;
+}
+
+form {
+  min-height: calc(100vh - 120px); /* Adjust height to fit the screen */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Adjustments for timer and submit button for small screens */
+@media (max-width: 768px) {
+  .question-grid {
+    grid-template-columns: 1fr; /* Stack questions on smaller screens */
+  }
+
+  form {
+    height: auto; /* Allow form to adjust in height on small screens */
+  }
+
+}
+
+#timer {
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: red;
+}
+
+button[type='submit'] {
+  display: block;
+  width: calc(100% - 20px); /* Adjust width to account for padding */
+  padding: 10px;
+  border: none;
+  background: #5cb85c;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  border-radius: 5px;
+  box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+button[type='submit']:hover {
+  background: #4cae4c;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  form {
+    width: calc(100% - 20px); /* Adjust for smaller screens */
+    padding: 10px;
+  }
+
+  #timer {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 24px;
+  }
+
+  #timer {
+    font-size: 14px;
+  }
+
+  button[type='submit'] {
+    font-size: 16px;
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <h1>Timed Quiz</h1>
+
+    <form action="/submit-quiz" method="post">
+      <div class="question-grid">
+        <% questions.forEach((question, index)=> { %>
+          <div class="question-box">
+            <p>
+              <%= index + 1 %>. <%= question.question %>
+            </p>
+            <% question.options.forEach(option=> { %>
+              <label>
+                <input type="radio" name="answer<%= index %>" value="<%= option %>" />
+                <%= option %>
+              </label>
+              <% }); %>
+          </div>
+          <% }); %>
+      </div>
+
+      <div id="timer">Time: <span id="countdown"></span></div>
+
+      <button type="submit">Submit Quiz</button>
+    </form>
+
+    <!-- Add your script tags for JavaScript if applicable -->
+    <script>
+      const countdownTime = 300; // 5 minutes in seconds
+
+      let timer = countdownTime;
+
+      function updateTimer() {
+        const minutes = Math.floor(timer / 60);
+        const seconds = timer % 60;
+
+        document.getElementById(
+          "countdown"
+        ).innerHTML = `${minutes}:${seconds}`;
+
+        if (timer <= 0) {
+          document.querySelector("form").submit();
+        } else {
+          timer--;
+          setTimeout(updateTimer, 1000);
+        }
+      }
+
+      updateTimer(); // Start the timer when the page loads
+    </script>
+  </body>
+</html>
